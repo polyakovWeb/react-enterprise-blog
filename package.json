@@ -11,7 +11,7 @@
     "stylelint": "npx stylelint \"**/*.scss\"",
     "stylelint:fix": "npx stylelint \"**/*.scss\" --fix",
     "preview": "vite preview",
-    "test:unit": "vitest",
+    "test": "vitest",
     "chromatic": "npx chromatic --config-file=./configs/chromatic/chromatic.config.json --project-token=chpt_ac504a87c10cc00 --build-script-name=storybook:build ",
     "chromatic:rebuild": "npx chromatic --config-file=./configs/chromatic/chromatic.config.json --project-token=chpt_ac504a87c10cc00 --build-script-name=storybook:build --force-rebuild",
     "storybook": "storybook dev -p 6006 -c ./configs/storybook",

@@ -1,0 +1,63 @@
+name: Linting + Build
+run-name: ${{ github.actor }} Linting pipeline
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 24.x]
+    
+    steps:
+      - name: Checkout@v2 action
+        uses: actions/checkout@v7
+      
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Restoring Yarn cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key:
+            ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      
+      - name: Installing packages
+        run: npm ci
+      
+      - name: Get file changes
+        id: get_file_changes
+        uses: trilom/file-changes-action@v1.2.4
+        with:
+          output: ' '
+      
+      - name: Echo file changes
+        id: echo_file_changes
+        run: |
+          echo Added files: ${{ steps.get_file_changes.outputs.files_added }}
+          echo Changed files: ${{ steps.get_file_changes.outputs.files_modified }}
+          echo Removed files: ${{ steps.get_file_changes.outputs.files_removed }}
+      
+      - name: ESLint Checking
+        if: ${{ always() && (steps.get_file_changes.outputs.files_added || steps.get_file_changes.outputs.files_modified) }}
+        run: npm run lint -- ${{ steps.get_file_changes.outputs.files_added }} ${{ steps.get_file_changes.outputs.files_modified }} --fix
+      
+      - name: StyleLint Checking
+        if: ${{ always() && (steps.get_file_changes.outputs.files_added || steps.get_file_changes.outputs.files_modified) }}
+        run: npm run stylelint:fix -- ${{ steps.get_file_changes.outputs.files_added }} ${{ steps.get_file_changes.outputs.files_modified }}
+      
+      - name: Project building + TypeScript checking
+        if: ${{ always() }}
+        run: npm run build
+      
+      - name: Commit changes
+        if: always()
+        uses: stefanzweifel/git-auto-commit-action@v4.1.2
+        with:
+          commit_message: Apply formatting changes

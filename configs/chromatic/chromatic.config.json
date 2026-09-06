@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.chromatic.com/config-file.schema.json",
-  "projectId": "chpt_ac504a87c10cc00",
+  "projectId": "Project:6a9bb0c1a87eea7e2fc3de24",
   "autoAcceptChanges": "main",
   "exitOnceUploaded": true,
   "externals": ["public/**"],

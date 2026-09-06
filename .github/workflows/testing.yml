@@ -1,0 +1,47 @@
+name: Unit + UI Testing
+run-name: ${{ github.actor }} testing pipeline
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+jobs:
+  unit-ui-testing:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 24.x]
+    
+    steps:
+      - name: Checkout@v2 action
+        uses: actions/checkout@v7
+      
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Restoring Yarn cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key:
+            ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      
+      - name: Installing packages
+        run: npm ci
+      
+      - name: Testing
+        if: always()
+        run: npm run test
+          
+          #      - name: Testing Storybook UI with Chromatic
+          #        if: always()
+        #        run:
+      
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
+#        интегрировать chromatic
