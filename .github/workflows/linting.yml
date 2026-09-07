@@ -13,22 +13,16 @@ jobs:
         node-version: [20.x, 24.x]
     
     steps:
-      - name: Checkout@v2 action
-        uses: actions/checkout@v7
+      - name: Checkout
+        uses: actions/checkout@v4
       
-      - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v7
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          
-      - name: Restoring Npm cache
-        uses: actions/cache@v4
-        with:
-          path: '**/node_modules'
-          key:
-            ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          cache: 'npm'
       
-      - name: Installing packages
+      - name: Install dependencies
         run: npm ci
       
       - name: Get file changes
@@ -37,27 +31,47 @@ jobs:
         with:
           output: ' '
       
-      - name: Echo file changes
-        id: echo_file_changes
+      - name: Filter changed files
+        id: filter_files
         run: |
-          echo Added files: ${{ steps.get_file_changes.outputs.files_added }}
-          echo Changed files: ${{ steps.get_file_changes.outputs.files_modified }}
-          echo Removed files: ${{ steps.get_file_changes.outputs.files_removed }}
+          # Filter only JS/TS files for ESLint
+          ESLINT_FILES=""
+          for file in ${{ steps.get_file_changes.outputs.files_added }} ${{ steps.get_file_changes.outputs.files_modified }}; do
+            if [[ $file =~ \.(js|jsx|ts|tsx)$ ]]; then
+              ESLINT_FILES="$ESLINT_FILES $file"
+            fi
+          done
+          echo "eslint_files=$ESLINT_FILES" >> $GITHUB_OUTPUT
+          
+          # Filter only SCSS files for StyleLint
+          STYLELINT_FILES=""
+          for file in ${{ steps.get_file_changes.outputs.files_added }} ${{ steps.get_file_changes.outputs.files_modified }}; do
+            if [[ $file =~ \.scss$ ]]; then
+              STYLELINT_FILES="$STYLELINT_FILES $file"
+            fi
+          done
+          echo "stylelint_files=$STYLELINT_FILES" >> $GITHUB_OUTPUT
+      
+      - name: Echo file changes
+        run: |
+          echo "ESLint files: ${{ steps.filter_files.outputs.eslint_files }}"
+          echo "StyleLint files: ${{ steps.filter_files.outputs.stylelint_files }}"
       
       - name: ESLint Checking
-        if: ${{ always() && (steps.get_file_changes.outputs.files_added || steps.get_file_changes.outputs.files_modified) }}
-        run: npm run lint -- ${{ steps.get_file_changes.outputs.files_added }} ${{ steps.get_file_changes.outputs.files_modified }} --fix
+        if: ${{ always() && steps.filter_files.outputs.eslint_files != '' }}
+        run: npm run lint -- ${{ steps.filter_files.outputs.eslint_files }} --fix
       
       - name: StyleLint Checking
-        if: ${{ always() && (steps.get_file_changes.outputs.files_added || steps.get_file_changes.outputs.files_modified) }}
-        run: npm run stylelint:fix -- ${{ steps.get_file_changes.outputs.files_added }} ${{ steps.get_file_changes.outputs.files_modified }}
+        if: ${{ always() && steps.filter_files.outputs.stylelint_files != '' }}
+        run: npm run stylelint:fix -- ${{ steps.filter_files.outputs.stylelint_files }}
       
-      - name: Project building + TypeScript checking
+      - name: TypeScript checking and build
         if: ${{ always() }}
         run: npm run build
       
       - name: Commit changes
-        if: always()
-        uses: stefanzweifel/git-auto-commit-action@v4.1.2
+        if: ${{ always() && (steps.filter_files.outputs.eslint_files != '' || steps.filter_files.outputs.stylelint_files != '') }}
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Apply formatting changes
+          commit_message: "style: apply linting and formatting changes"
+          file_pattern: "*.{js,jsx,ts,tsx,scss}"

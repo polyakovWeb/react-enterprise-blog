@@ -13,35 +13,38 @@ jobs:
         node-version: [20.x, 24.x]
     
     steps:
-      - name: Checkout@v2 action
-        uses: actions/checkout@v7
+      - name: Checkout
+        uses: actions/checkout@v4
       
-      - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v7
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       
-      - name: Restoring Npm cache
-        uses: actions/cache@v4
-        with:
-          path: '**/node_modules'
-          key:
-            ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      
-      - name: Installing packages
+      - name: Install dependencies
         run: npm ci
       
-      - name: Testing
-        if: always()
-        run: npm run test
-          
-          #      - name: Testing Storybook UI with Chromatic
-          #        if: always()
-        #        run:
+      - name: Run unit tests with coverage
+        run: |
+          npm run test -- --run --coverage
       
-      - name: Run Chromatic
-        uses: chromaui/action@latest
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+      
+      - name: Run Chromatic for UI testing
+        uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-
-#        интегрировать chromatic
+          buildScriptName: storybook:build
+          configFile: ./configs/chromatic/chromatic.config.json
+          onlyChanged: true
+          autoAcceptChanges: ${{ github.ref == 'refs/heads/main' }}
+          exitOnceUploaded: true
+          skip: ${{ github.event_name == 'pull_request' && github.base_ref == 'main' }}

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+*.json
+*.lock
+*.config.js
+*.config.ts
+*.md
+*.yml
+*.yaml
