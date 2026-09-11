@@ -10,6 +10,7 @@ import { AppLink, AppLinkTheme } from "@/shared/AppLink";
 import Arrow from "@/shared/assets/vertical-line-with-right-arrow.svg?react"
 import Home from "@/shared/assets/home.svg?react"
 import About from "@/shared/assets/layout-fluid.svg?react"
+import { AppRoutes, RouterPath } from "@/shared/config/RouteConfig/RouteConfig.tsx";
 
 interface SideBarProps {
     className?: string
@@ -34,11 +35,13 @@ export const SideBar = ({className}: SideBarProps) => {
             {/* navigations */}
             <nav className={cls.navigations}>
                 {/* при необходимости можно итерироваться отдельным компонентом по массиву ссылок (конфигу) */}
-                <AppLink className={cls.link} theme={AppLinkTheme.SECONDARY} to={'/'}>
+                <AppLink data-testid={`app-link-${AppRoutes.MAIN}`} className={cls.link} theme={AppLinkTheme.SECONDARY}
+                         to={RouterPath[AppRoutes.MAIN]}>
                     <Home width={20} height={20}/>
                     <span className={cls.linkText}>{t('Главная')}</span>
                 </AppLink>
-                <AppLink className={cls.link} theme={AppLinkTheme.SECONDARY} to={'/about'}>
+                <AppLink data-testid={`app-link-${AppRoutes.ABOUT}`} className={cls.link} theme={AppLinkTheme.SECONDARY}
+                         to={RouterPath[AppRoutes.ABOUT]}>
                     <About width={20} height={20}/>
                     <span className={cls.linkText}>{t('О сайте')}</span>
                 </AppLink>

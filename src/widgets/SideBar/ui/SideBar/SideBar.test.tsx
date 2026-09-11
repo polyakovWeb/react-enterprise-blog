@@ -18,6 +18,7 @@ describe('Testing SideBar component', () => {
             .toBeInTheDocument()
         const toggleButton = screen.getByTestId("toggle-sidebar");
         fireEvent.click(toggleButton);
-        expect(screen.getByTestId("sidebar")).toHaveClass(cls.collapsed)
+        expect(screen.getByTestId("sidebar"))
+            .toHaveClass(cls.collapsed)
     })
 })
