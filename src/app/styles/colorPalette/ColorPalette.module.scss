@@ -1,0 +1,199 @@
+.page {
+    min-height: 100vh;
+    padding: 32px;
+    background: var(--color-bg-page);
+    color: var(--color-text-primary);
+}
+
+.header {
+    max-width: 920px;
+    margin: 0 auto 32px;
+}
+
+.title {
+    margin: 0 0 8px;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.description {
+    max-width: 680px;
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+.section {
+    max-width: 920px;
+    margin: 0 auto 32px;
+}
+
+.sectionTitle {
+    margin: 0 0 16px;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.tokenGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.token {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-surface);
+}
+
+.swatch {
+    width: 52px;
+    height: 52px;
+    border: 1px solid var(--color-border);
+}
+
+.tokenName {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--color-text-primary);
+    font-weight: 700;
+}
+
+.tokenDescription {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.surfaceDemo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.surface {
+    padding: 20px;
+    border: 1px solid var(--color-border);
+}
+
+.pageSurface {
+    background: var(--color-bg-page);
+}
+
+.componentSurface {
+    background: var(--color-bg-surface);
+}
+
+.sampleTitle {
+    margin: 0 0 8px;
+    color: var(--color-text-primary);
+    font-size: 18px;
+}
+
+.secondaryText {
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+.mutedText {
+    margin: 8px 0 0;
+    color: var(--color-text-muted);
+    font-size: 14px;
+}
+
+.accentGrid,
+.statusGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.accentButton {
+    min-height: 44px;
+    border: 0;
+    padding: 10px 16px;
+    color: var(--color-on-accent);
+    font: inherit;
+    cursor: pointer;
+}
+
+.accentButton:hover {
+    background: var(--color-accent-hover);
+}
+
+.accentButton:active {
+    background: var(--color-accent-active);
+}
+
+.accentButton:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+}
+
+.accent {
+    background: var(--color-accent);
+}
+
+.hover {
+    background: var(--color-accent-hover);
+}
+
+.active {
+    background: var(--color-accent-active);
+}
+
+.disabled {
+    background: var(--color-accent-disabled);
+    cursor: not-allowed;
+}
+
+.status {
+    padding: 16px;
+    border-left: 4px solid currentcolor;
+    background: var(--color-bg-surface);
+}
+
+.statusTitle {
+    margin: 0 0 4px;
+    font-weight: 700;
+}
+
+.statusText {
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+.info {
+    color: var(--color-info);
+}
+
+.danger {
+    color: var(--color-danger);
+}
+
+.success {
+    color: var(--color-success);
+}
+
+.warning {
+    color: var(--color-warning);
+}
+
+.linkDemo {
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.linkDemo:hover {
+    color: var(--color-accent-hover);
+}
+
+@media (width <= 600px) {
+    .page {
+        padding: 20px;
+    }
+}

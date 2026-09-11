@@ -1,26 +1,106 @@
 .SideBar {
     height: calc(100vh - var(--navbar-height));
     width: var(--sidebar-width);
-    background-color: var(--bg-color);
+    background-color: var(--color-bg-surface);
     padding: 10px;
-    transition: width ease-in-out 0.2s;
+    transition: width ease-in-out 0.3s;
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-.switchers {
-    position: absolute;
-    bottom: 15px;
-    display: flex;
-    gap: 5px;
-}
-
-.collapsed {
-    width: var(--sidebar-width-collapsed);
-  
-    .switchers {
+    justify-content: space-between;
+    overflow: hidden;
+    
+    .navigations {
+        display: flex;
         flex-direction: column;
+        gap: 5px;
+        
+        .link {
+            padding: 5px 5px 5px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: flex-start;
+            
+            svg {
+                fill: var(--color-text-primary);
+                flex-shrink: 0;
+            }
+            
+            .linkText {
+                white-space: nowrap;
+                opacity: 1;
+                transition: opacity 0.2s ease-in-out 0.3s;
+            }
+        }
+    }
+    
+    .footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        justify-self: flex-end;
+        
+        .switchers {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .toggleButton {
+            white-space: nowrap;
+            display: block;
+            text-align: center;
+            
+            .arrowSvg {
+                position: absolute;
+                left: 30px;
+                transition: transform ease-in-out 0.3s;
+                transform: rotate(0deg);
+            }
+            
+            .toggleButtonTitle {
+                opacity: 1;
+                transition: opacity ease-in-out 0.15s;
+                transition-delay: 0.3s;
+            }
+        }
+    }
+    
+    &.collapsed {
+        width: var(--sidebar-width-collapsed);
+        
+        .navigations {
+            .link {
+                .linkText {
+                    opacity: 0;
+                    transition: opacity 0.1s ease-in-out 0s;
+                    width: 0;
+                    overflow: hidden;
+                }
+            }
+        }
+        
+        .footer {
+            .switchers {
+                flex-direction: column;
+            }
+            
+            .toggleButton {
+                height: calc(var(--font-line-m) + 10px);
+                
+                .arrowSvg {
+                    position: relative;
+                    left: 8px;
+                    transform: rotate(180deg);
+                }
+                
+                .toggleButtonTitle {
+                    opacity: 0;
+                    transition: opacity ease-in-out 0s;
+                }
+            }
+        }
     }
 }

@@ -1,25 +1,91 @@
 .Button {
     cursor: pointer;
-    background: none;
-    color: var(--primary-color);
-}
-
-.clear {
+    padding: 5px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    padding: 0;
+    gap: 10px;
     border: none;
-
-    // background: none;
-    outline: none;
+    background-color: transparent;
 }
 
-.outline {
-    padding: 10px 15px;
-    border: 1px solid var(--primary-color);
+.primary {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    
+    &:hover {
+        background-color: var(--color-accent-hover);
+    }
+    
+    &:active {
+        background-color: var(--color-accent-active);
+    }
+}
 
-    // color: var(--primary-color);
-    // background: none;
+.secondary {
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    
+    &:hover {
+        color: var(--color-accent-hover);
+        border-color: var(--color-accent-hover);
+    }
+    
+    &:active {
+        color: var(--color-accent-active);
+        border-color: var(--color-accent-active);
+    }
+}
+
+.clear {
+    padding: 0;
+    
+    &:hover {
+        opacity: 0.8;
+    }
+    
+    &:active {
+        opacity: 0.9
+    }
+}
+
+.size-s {
+    font: var(--font-s);
+}
+
+.size-m {
+    font: var(--font-m);
+}
+
+.size-l {
+    font: var(--font-l);
+}
+
+.size-xl {
+    font: var(--font-xl);
+}
+
+.rounded-none {
+    border-radius: 0;
+}
+
+.rounded-s {
+    border-radius: 5px;
+}
+
+.rounded-m {
+    border-radius: 10px;
+}
+
+.rounded-l {
+    border-radius: 15px;
+}
+
+.disabled {
+    cursor: not-allowed;
+    background-color: var(--color-accent-disabled);
+    
+    &:hover, &:active {
+        background-color: var(--color-accent-disabled);
+    }
 }

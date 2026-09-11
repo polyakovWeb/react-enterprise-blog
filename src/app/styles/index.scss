@@ -5,8 +5,8 @@
 
 .app {
     font: var(--font-m);
-    background: var(--inverted-bg-color);
-    color: var(--primary-color);
+    background: var(--color-bg-page);
+    color: var(--color-text-primary);
     min-height: 100vh;
 
     // Для центровки Loader i18n

@@ -1,8 +1,41 @@
 .app.dark {
-    --bg-color: #e8e8ea;
-    --inverted-bg-color: #090949;
-    --primary-color: #049604;
-    --secondary-color: #04ff04;
-    --inverted-primary-color: #0232c2;
-    --inverted-secondary-color: #0051ff;
+    // --color-bg-page: фон страницы;
+    // --color-bg-surface: фон Navbar/Sidebar;
+    // --color-text-primary: основной текст;
+    // --color-text-secondary: вторичный текст;
+    
+    // --color-accent: основной акцент;
+    // --color-accent-hover: акцент при наведении;
+    // --color-accent-active: акцент при активации
+    // --color-accent-disabled: акцент при выключении
+    // --color-on-accent: текст на акцентной кнопке;
+    
+    // --color-border: границы, разделители;
+    // --color-text-muted: неактивный и вспомогательный текст;
+    // --color-focus: фокус клавиатуры и accessibility;
+    
+    // --color-info: информация
+    // --color-danger: ошибки и удаление;
+    // --color-success: успешные действия;
+    // --color-warning: предупреждения. 
+    
+    --color-bg-page: #101c24;
+    --color-bg-surface: #1a2b35;
+    --color-text-primary: #e4f0ed;
+    --color-text-secondary: #a9bfbb;
+    
+    --color-accent: #4db6ac;
+    --color-accent-hover: #72cbc1;
+    --color-accent-active: #8bd8cf;
+    --color-accent-disabled: #496f6b;
+    --color-on-accent: #10252b;
+    
+    --color-border: #344b54;
+    --color-text-muted: #809894;
+    --color-focus: #8bd8cf;
+    
+    --color-info: #64b5d1;
+    --color-danger: #ef8b8b;
+    --color-success: #75c995;
+    --color-warning: #e6b86a;
 }

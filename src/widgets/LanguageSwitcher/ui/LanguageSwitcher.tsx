@@ -5,19 +5,23 @@ import { Button, ButtonTheme } from "@/shared/Button";
 
 interface LanguageSwitcherProps {
     className?: string
+    short?: boolean;
 }
 
-export const LanguageSwitcher = ({className}: LanguageSwitcherProps) => {
+export const LanguageSwitcher = ({className, short = false}: LanguageSwitcherProps) => {
     const {t, i18n} = useTranslation('sidebar');
 
-    function toggleLanguage() {
+    async function toggleLanguage() {
         const newLang = i18n.language === 'ru' ? 'en' : 'ru';
-        i18n.changeLanguage(newLang);
+        await i18n.changeLanguage(newLang);
     }
 
     return (
-        <Button theme={ButtonTheme.CLEAR} onClick={toggleLanguage} className={classNames(cls.LanguageSwitcher, {}, [className])}>
-            {t(['Язык'])}: {i18n.language}
+        <Button
+            theme={ButtonTheme.CLEAR}
+            onClick={toggleLanguage}
+            className={classNames(cls.LanguageSwitcher, {}, [className])}>
+            {!short && `${t(['Язык'])}: `}{i18n.language.toUpperCase()}
         </Button>
     )
 }
