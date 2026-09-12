@@ -21,7 +21,7 @@ export const LanguageSwitcher = ({className, short = false}: LanguageSwitcherPro
             theme={ButtonTheme.CLEAR}
             onClick={toggleLanguage}
             className={classNames(cls.LanguageSwitcher, {}, [className])}>
-            {!short && `${t(['Язык'])}: `}{i18n.language.toUpperCase()}
+            {!short && `${t(['Язык'])}: `}{t('Сокращение языка')}
         </Button>
     )
 }

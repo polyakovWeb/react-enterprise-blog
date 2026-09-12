@@ -15,6 +15,7 @@
     "test:run": "vitest --run",
     "test:watch": "vitest",
     "chromatic": "npx chromatic --config-file=./configs/chromatic/chromatic.config.json --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name=storybook:build",
+    "chromatic:local": "dotenv -e .env -- npx chromatic --config-file=./configs/chromatic/chromatic.config.json --build-script-name=storybook:build",
     "chromatic:rebuild": "npx chromatic --config-file=./configs/chromatic/chromatic.config.json --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name=storybook:build --force-rebuild",
     "storybook": "storybook dev -p 6006 -c ./configs/storybook",
     "storybook:build": "storybook build -c ./configs/storybook"
@@ -48,6 +49,7 @@
     "@vitest/browser-playwright": "4.1.11",
     "@vitest/coverage-v8": "4.1.11",
     "chromatic": "^18.7.2",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^10.10.0",
     "eslint-plugin-i18next": "^6.1.5",
     "eslint-plugin-react-hooks": "^7.1.1",
