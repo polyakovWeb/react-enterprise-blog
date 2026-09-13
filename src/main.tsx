@@ -4,6 +4,7 @@ import App from './app/App.tsx'
 import { ThemeProvider } from "./app/providers/ThemeProvider";
 import { BrowserRouter } from "react-router";
 
+import './app/styles/index.scss';
 import "./shared/config/i18n/i18n.ts"
 import ErrorBoundary from "@/app/providers/ErrorBoundary";
 

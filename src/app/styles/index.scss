@@ -3,12 +3,15 @@
 @use "themes/normal";
 @use "themes/dark";
 
-.app {
+body {
     font: var(--font-m);
-    background: var(--color-bg-page);
     color: var(--color-text-primary);
-    min-height: 100vh;
+}
 
+.app {
+    background: var(--color-bg-page);
+    min-height: 100vh;
+    
     // Для центровки Loader i18n
     // display: flex;
     // flex-direction: column;

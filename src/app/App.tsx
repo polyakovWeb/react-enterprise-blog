@@ -1,4 +1,3 @@
-import './styles/index.scss';
 import { useTheme } from "@/entities/theme";
 import { classNames } from "@/shared/lib/classNames/classnames";
 import { AppRouter } from "@/app/providers/router";
@@ -12,7 +11,7 @@ const App = () => {
     const {theme} = useTheme();
 
     return (
-        <div className={classNames('app', {}, [theme])}>
+        <div id="app" className={classNames('app', {}, [theme])}>
             {/*i18n suspense*/}
             <Suspense fallback={<LoaderWidget/>}>
                 <NavBar/>
