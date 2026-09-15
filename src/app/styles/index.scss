@@ -6,16 +6,9 @@
 body {
     font: var(--font-m);
     color: var(--color-text-primary);
-}
-
-.app {
     background: var(--color-bg-page);
     min-height: 100vh;
     
-    // Для центровки Loader i18n
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
 }
 
 .content-page {

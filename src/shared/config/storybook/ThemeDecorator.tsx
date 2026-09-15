@@ -5,11 +5,10 @@ import { ThemeProvider } from "@/app/providers/ThemeProvider";
 
 export const ThemeDecorator = (Story: Story, context: StoryContext) => {
     const theme = context.globals.theme as ThemeT;
+
     return (
-        <ThemeProvider>
-            <div className={`app ${theme}`}>
-                <Story/>
-            </div>
+        <ThemeProvider initialTheme={theme}>
+            <Story/>
         </ThemeProvider>
     );
 };

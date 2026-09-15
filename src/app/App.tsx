@@ -1,5 +1,3 @@
-import { useTheme } from "@/entities/theme";
-import { classNames } from "@/shared/lib/classNames/classnames";
 import { AppRouter } from "@/app/providers/router";
 import { NavBar } from "@/widgets/NavBar";
 import { SideBar } from "@/widgets/SideBar";
@@ -8,10 +6,8 @@ import { LoaderWidget } from "@/widgets/LoaderWidget";
 import ErrorBoundary from "@/app/providers/ErrorBoundary";
 
 const App = () => {
-    const {theme} = useTheme();
-
     return (
-        <div id="app" className={classNames('app', {}, [theme])}>
+        <>
             {/*i18n suspense*/}
             <Suspense fallback={<LoaderWidget/>}>
                 <NavBar/>
@@ -24,7 +20,7 @@ const App = () => {
                     </ErrorBoundary>
                 </div>
             </Suspense>
-        </div>
+        </>
     );
 };
 

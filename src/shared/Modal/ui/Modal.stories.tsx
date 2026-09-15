@@ -87,3 +87,42 @@ export const ChildrenClosing: Story = {
         );
     }
 };
+
+export const OpenedModal: Story = {
+    render: () => {
+        const [isOpen, setIsOpen] = useState(true);
+
+        function openModal() {
+            setIsOpen(true);
+        }
+
+        function closeModal() {
+            setIsOpen(false);
+        }
+
+        return (
+            <>
+                <Button onClick={openModal}>
+                    Открыть модальное окно
+                </Button>
+
+                <Modal
+                    isOpen={isOpen}
+                    onClose={closeModal}
+                >
+                    <div style={{display: "flex", flexDirection: "column", textAlign: 'center', gap: '10px'}}>
+                        <h2>Модальное окно (children mode)</h2>
+                        <p>Это содержимое модального окна. Закрытие только при нажатии на кнопку. <br/>
+                        </p>
+                        <p>Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit. Doloremque esse laboriosam nisi tempore totam
+                            veritatis! Doloribus expedita fuga provident voluptas.</p>
+                        <Button onClick={closeModal}>
+                            Закрыть
+                        </Button>
+                    </div>
+                </Modal>
+            </>
+        );
+    }
+};

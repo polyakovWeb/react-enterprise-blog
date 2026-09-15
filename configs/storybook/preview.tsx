@@ -29,12 +29,10 @@ const preview: Preview = {
                 title: 'Theme',
                 items: [
                     {value: Theme.LIGHT,
-                        title: Theme.LIGHT.charAt(0)
-                            .toUpperCase() + Theme.LIGHT.slice(1)
+                        title: "Light"
                     },
                     {value: Theme.DARK,
-                        title: Theme.DARK.charAt(0)
-                            .toUpperCase() + Theme.DARK.slice(1)
+                        title: "Dark"
                     },
                 ],
             },
